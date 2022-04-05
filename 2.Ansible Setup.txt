@@ -25,12 +25,17 @@ ssh ubuntu@3.15.159.16
 sudo hostnamectl set-hostname MyNode2
 
 Ansible Controller - Node
-==================
+
+==================================================================
+
 1) Create the VM Instance in the required Cloud
 
 2) Setup Password to Cloud Instance
 
-sudo passwd ubuntu
+before check username:
+whoami==> pmsjavateam3
+sudo passwd pmsjavateam3
+Mukesh@123
 
 sudo vim /etc/ssh/sshd_config
 

@@ -1,5 +1,5 @@
 Ansible Contriller
-ssh ubuntu@3.128.76.85
+ssh ubuntu@18.118.185.155
 
 
 Ansible Roles
@@ -96,12 +96,13 @@ B) On Ansible Controller
 ===================
 3) Create the MyWork Directory.
 (Note : This MyWork folder contains playbooks and roles folder)
+
 mkdir MyWork
 cd MyWork
 
 4)Copy ansible.cfg from local to /home/ubuntu/MyWork
 
-scp ansible.cfg ubuntu@3.128.76.85:/home/ubuntu/MyWork
+scp ansible.cfg ubuntu@18.118.185.155:/home/ubuntu/MyWork
 
 5) Create hello-playbook.yml under MyWork
 
@@ -111,9 +112,12 @@ touch hello-playbook.yml
 
 mkdir roles
 cd roles
+
 7) Create the Role using ansible-galaxy command
 
 roles> ansible-galaxy  init hello-role
+
+- Role hello-role was created successfully
 
 8) You can see hello-role is created and observe following directory sructure.
 
@@ -251,14 +255,26 @@ hello-playbook.yml
 
 25) Now Every thing on Local. Move to Ansible controller 
 =========================================================
-  scp  hello-playbook.yml ubuntu@3.144.214.179:/home/ubuntu/mywork
-  scp -r  hello-role ubuntu@3.144.214.179:/home/ubuntu/mywork/roles
+scp  hello-playbook.yml ubuntu@18.118.185.155:/home/ubuntu/MyWork
+scp -r  hello-role ubuntu@18.118.185.155:/home/ubuntu/MyWork/roles
 =========================================================
 
 D) On Ansible Controller
 ===================
 26)Check the Directory Structure and files on Ansible Controller as follows.
 
+hello-role/
+├── README.md
+├── defaults
+│   └── main.yml
+├── files
+│   └── hello.txt
+├── tasks
+│   └── main.yml
+├── templates
+│   └── hello-template.j2
+└── vars
+    └── main.yml
 
 27) Run the Playbook
 
@@ -266,7 +282,11 @@ ansible-playbook hello-playbook.yml
 
 ansible all -a "ls -l /home/ubuntu/bookStore"
 
-E) On MyNode1
+ansible all -a "cat /home/ubuntu/bookStore/hello.txt"
+
+ansible all -a "cat /home/ubuntu/bookStore/hello-template.j2"
+
+E) On MyNode1  (Optional)
 ===================
 28) Connect to  MyNode1 
 
@@ -275,7 +295,7 @@ ssh ubuntu@52.15.60.96
 29) Check the Files and Content 
 
 cd bookStore
-bookStore $ cat hellojlc.txt
+bookStore $ cat hello.txt
 
 bookStore $ cat hello-template.j2
 
